@@ -107,7 +107,7 @@ void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, Linke
 	// 그 위치만을 찾아주면 문제없지
 	// 근데 우리는 ll의 size를 알고 있지
 
-	if (ll == NULL){
+	if (ll == NULL || ll -> head == NULL || ll -> size == 0){
 		return;
 	}
 
@@ -129,7 +129,6 @@ void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, Linke
 
 	// 이거 안 하면 double free 뜨는듯 코드 구현 특성상
 	ll -> head = NULL;
-	
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

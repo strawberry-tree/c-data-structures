@@ -156,8 +156,8 @@ void removeOddValues(Queue *q)
 				prev -> next = curr -> next;
 			}
 
-			// 일단 연결 리스트 `ll`엔 삭제될 노드가 남아 있으니까, free처리하면 안되겠죠?
-
+			// free하지 않는 이유: removeAllItemsFromQueue, removeAllItems가 해 줌.
+			
 			// 다음 노드로 이동
 			if (prev == NULL){
 				curr = (q -> ll).head;

@@ -109,7 +109,16 @@ int main()
 
 void recursiveReverse(Queue *q)
 {
-/* add your code here */
+	// 종료조건: 리버스할 게 없음
+	if ((q -> ll).size <= 1){
+		return;
+	}
+	// 맨 앞 값을 디큐
+	int first_val = dequeue(q);
+	// 나머지 값을 정렬
+	recursiveReverse(q);
+	// 맨 뒤에 인큐
+	enqueue(q, first_val);
 }
 
 //////////////////////////////////////////////////////////////////

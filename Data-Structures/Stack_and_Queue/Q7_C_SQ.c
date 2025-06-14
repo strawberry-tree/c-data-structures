@@ -104,7 +104,40 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+	Stack s;
+	s.ll.head = NULL;
+	s.ll.size = 0;
+
+	char letter;	// 현재 문자
+	if (expression == NULL) return 1;		// 예외처리
+	
+	// 종료 조건을 만날 때까지
+	while ((letter = *expression) != '\0'){
+		if (letter == '(' || letter == '[' || letter == '{'){
+			push(&s, letter);
+		} else {
+			// 맨 위 값과 짝을 이루고 있나 확인
+			if (isEmptyStack(&s)){
+				return 1;	// 불균형
+			} else if (peek(&s) == '(' && letter == ')'){
+				pop(&s);
+			} else if (peek(&s) == '[' && letter == ']'){
+				pop(&s);
+			} else if (peek(&s) == '{' && letter == '}'){
+				pop(&s);
+			} else{
+				return 1;	// 불균형
+			}
+		}
+		// 다음 문자로 넘어가기
+		expression++;
+	}
+
+	if (s.ll.size == 0){
+		return 0;		// 균형
+	} else {
+		return 1;		// 불균형
+	}
 }
 
 ////////////////////////////////////////////////////////////

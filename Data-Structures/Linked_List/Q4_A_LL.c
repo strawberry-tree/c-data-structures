@@ -88,9 +88,11 @@ void moveEvenItemsToBack(LinkedList *ll)
 {
 	ListNode *curr, *prev, *back;
 
-	if (ll == NULL) return;
+	if (ll == NULL) return; // 연결 리스트가 없는 경우
 
 	curr = ll -> head;						// 현재 노드
+
+	if (curr == NULL) return; // 머리 노드가 없는 경우
 	back = findNode(ll, (ll -> size) - 1);	// 맨 끝 노드
 	prev = NULL;		// curr 이전 노드
 	int idx = ll -> size;	// 무한루프 방지
@@ -120,7 +122,6 @@ void moveEvenItemsToBack(LinkedList *ll)
 			prev = curr;
 			curr = curr -> next;
 		}
-
 		idx--;	
 	}
 }

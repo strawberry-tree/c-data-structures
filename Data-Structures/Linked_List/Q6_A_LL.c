@@ -113,16 +113,16 @@ int moveMaxToFront(ListNode **ptrHead)
 
 	// 최대 노드의 이전 노드는, 최대 노드를 건너뛰고 가리키게 함
 	if (maxPrev == NULL){
-		*ptrHead = maxNode -> next;
+		return 0;	// 이미 맨 앞에 있으니까!!
 	} else {
 		maxPrev -> next = maxNode -> next;
+		// 최대 노드의 다음 노드를 원래 시작 노드로
+		maxNode -> next = *ptrHead;
+		// 시작 노드를 최대 노드로
+		*ptrHead = maxNode;
 	}
 
-	// 최대 노드의 다음 노드를 원래 시작 노드로
-	maxNode -> next = *ptrHead;
-	// 시작 노드를 최대 노드로
-	*ptrHead = maxNode;
-
+	
 	return 0;
 }
 

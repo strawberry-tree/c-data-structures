@@ -88,9 +88,12 @@ void moveOddItemsToBack(LinkedList *ll)
 {
 	ListNode *curr, *prev, *back;
 
-	if (ll == NULL) return;
+	if (ll == NULL) return;	// 연결리스트가 없는 경우
 
 	curr = ll -> head;	// 현재 노드를 가리킴
+
+	if (curr == NULL) return; // 머리 노드가 없는 경우
+
 	back = findNode(ll, (ll -> size) - 1);	// 꼬리 노드를 가리킴
 	prev = NULL;		// 현재 노드 이전의 노드를 가리킴
 	int idx = ll -> size;	// 무한루프 방지
