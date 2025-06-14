@@ -113,12 +113,62 @@ int main()
 
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
-    /* add your code here */
+	// 연결 리스트나 스택이 존재하지 않는 경우
+    if (ll == NULL || s == NULL) return;
+	
+	// 스택이 비어있지 않은 경우, 비우기. 사이즈도 0 처리.
+	(s -> ll).head = NULL;
+	(s -> ll).size = 0;
+
+	// 연결 리스트의 각 노드를 탐색하며 스택에 푸시
+	ListNode *cur = ll -> head;
+
+	while (cur != NULL){
+		// 스택(으로 둔갑한 연결 리스트)에 값을 푸시
+		push(s, cur -> item);
+		cur = cur -> next;
+	}
 }
 
 void removeEvenValues(Stack *s)
 {
-	/* add your code here */
+	ListNode *curr, *prev, *back;
+
+	if (s == NULL) return;
+
+	curr = (s -> ll).head;		// 현재 노드를 가리킴
+	prev = NULL;				// 현재 노드 이전의 노드를 가리킴
+	int idx = (s -> ll).size;	// 총 몇 번 탐색?
+
+	while (idx > 0){
+		if (curr -> item % 2 == 0){
+			(s -> ll).size--;
+			// 이전 노드가 가리키는 노드를, 현재 노드의 다음 노드로 변경
+			if (prev == NULL){
+				(s -> ll).head = curr -> next;
+			} else {
+				prev -> next = curr -> next;
+			}
+
+			// free하지 않는 이유: removeAllItemsFromStack, removeAllItems가 해 줌.
+
+			// 다음 노드로 이동
+			if (prev == NULL){
+				curr = (s -> ll).head;
+			} else {
+				curr = prev -> next;
+			}
+		}
+
+		else {
+			// 다음 노드로 이동
+			prev = curr;
+			curr = curr -> next;
+		}
+
+		idx--;
+		
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

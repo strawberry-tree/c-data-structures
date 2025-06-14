@@ -86,7 +86,52 @@ int main()
 
 void moveOddItemsToBack(LinkedList *ll)
 {
-	/* add your code here */
+	ListNode *curr, *prev, *back;
+
+	if (ll == NULL) return;
+
+	curr = ll -> head;	// 현재 노드를 가리킴
+	back = findNode(ll, (ll -> size) - 1);	// 꼬리 노드를 가리킴
+	prev = NULL;		// 현재 노드 이전의 노드를 가리킴
+	int idx = ll -> size;	// 무한루프 방지
+
+	while (idx > 0){
+		if (curr -> item % 2 == 1){
+			
+			// 이전 노드가 가리키는 노드를, 현재 노드의 다음 노드로 변경
+			if (prev == NULL){
+				ll -> head = curr -> next;
+			} else {
+				prev -> next = curr -> next;
+			}
+
+			// 꼬리 노드를 변경 후, next를 NULL로 변경
+			back -> next = curr;
+			back = curr;
+			back -> next = NULL;
+
+			// 다음 노드로 이동
+			// 단, 다음 노드가 바뀌었다는 점에 유의
+			// prev는 수정할 필요가 없음
+			if (prev == NULL){
+				curr = ll -> head;
+			} else {
+				curr = prev -> next;
+			}
+			
+		}
+
+		else {
+			// 다음 노드로 이동
+			prev = curr;
+			curr = curr -> next;
+		}
+
+		idx--;
+		
+	}
+	
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

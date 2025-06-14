@@ -103,7 +103,27 @@ int main()
 
 int isStackPairwiseConsecutive(Stack *s)
 {
-  /* add your code here */
+	if (s == NULL) return 0;
+	int val1, val2;
+	if ((s -> ll).size % 2 == 1){
+		return 0;
+	}
+
+	while (1){
+		// 더 이상 비교가 불가능
+	if ((s -> ll).size == 0){
+		return 1;	// pairly consecutive
+	}
+	
+  	val1 = pop(s);
+	val2 = pop(s);
+
+	// val1, val2를 뺄 때 1, -1이면 pairly consecutive
+	if (val1 - val2 != 1 && val1 - val2 != -1){
+		return 0;
+	}
+	}
+	
 }
 
 //////////////////////////////////////////////////////////////////////////////////

@@ -116,12 +116,65 @@ int main()
 
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
-	/* add your code here */
+	// 연결 리스트나 큐가 존재하지 않는 경우
+	if (ll == NULL || q == NULL){
+		return;
+	}
+
+	// 큐가 비어있지 않은 경우, 비우기. 사이즈도 0 처리.
+	(q -> ll).head = NULL;
+	(q -> ll).size = 0;
+
+	// 연결 리스트의 각 노드를 탐색하며 큐에 인큐
+	ListNode *cur = ll -> head;		// 연결리스트의 현재 노드
+
+
+	while (cur != NULL){
+		// 큐(로 둔갑한 연결 리스트)에 값을 인큐
+		enqueue(q, cur -> item);
+		cur = cur -> next;
+	}
 }
 
 void removeOddValues(Queue *q)
 {
-	/* add your code here */
+	ListNode *curr, *prev, *back;
+
+	if (q == NULL) return;
+
+	curr = (q -> ll).head;		// 현재 노드를 가리킴
+	prev = NULL;				// 현재 노드 이전의 노드를 가리킴
+	int idx = (q -> ll).size;	// 총 몇 번 탐색?
+
+	while (idx > 0){
+		if (curr -> item % 2 == 1){
+			(q -> ll).size--;
+			// 이전 노드가 가리키는 노드를, 현재 노드의 다음 노드로 변경
+			if (prev == NULL){
+				(q -> ll).head = curr -> next;
+			} else {
+				prev -> next = curr -> next;
+			}
+
+			// 일단 연결 리스트 `ll`엔 삭제될 노드가 남아 있으니까, free처리하면 안되겠죠?
+
+			// 다음 노드로 이동
+			if (prev == NULL){
+				curr = (q -> ll).head;
+			} else {
+				curr = prev -> next;
+			}
+		}
+
+		else {
+			// 다음 노드로 이동
+			prev = curr;
+			curr = curr -> next;
+		}
+
+		idx--;
+		
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

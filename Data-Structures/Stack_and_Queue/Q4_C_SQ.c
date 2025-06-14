@@ -112,7 +112,20 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	Stack s;
+	s.ll.head = NULL;
+	s.ll.tail = NULL;
+	s.ll.size = 0;
+
+	// free는 dequeue -> removeNode에서 진행되니
+	// 여기서 하면 안 되겠죠?
+	while (isEmptyQueue(q) == 0){
+		push(&s, dequeue(q));
+	}
+
+	while (isEmptyStack(&s) == 0){
+		enqueue(q, pop(&s));
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

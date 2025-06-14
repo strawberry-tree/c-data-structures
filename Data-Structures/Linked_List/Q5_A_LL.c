@@ -39,6 +39,7 @@ int removeNode(LinkedList *ll, int index);
 int main()
 {
 	int c, i;
+	c = 1;		// 원래 코드엔 이 줄이 없음
 	LinkedList ll;
 	LinkedList resultFrontList, resultBackList;
 
@@ -102,7 +103,33 @@ int main()
 
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
-	/* add your code here */
+	// FrontList와 BackList의 head은 지금 NULL이야
+	// 그 위치만을 찾아주면 문제없지
+	// 근데 우리는 ll의 size를 알고 있지
+
+	if (ll == NULL){
+		return;
+	}
+
+	int limit = ((ll -> size) - 1) / 2; 
+	// 앞 리스트에 들어갈 마지막 노드 위치
+	
+	ListNode *curr = ll -> head;    	// 현재 노드
+
+	for (int i = 0; i < limit; i++){
+		curr = curr -> next;
+	}
+	// 생각해보니 size도 필요하겠구나
+	resultBackList -> head = curr -> next;
+	resultBackList -> size = (ll -> size) - limit;
+	curr -> next = NULL;
+	
+	resultFrontList -> head = ll -> head;
+	resultFrontList -> size = limit + 1;
+
+	// 이거 안 하면 double free 뜨는듯 코드 구현 특성상
+	ll -> head = NULL;
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

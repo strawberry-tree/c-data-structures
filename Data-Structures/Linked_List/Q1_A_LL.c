@@ -71,7 +71,7 @@ int main()
 		case 3:
 			printf("The resulting sorted linked list is: ");
 			printList(&ll);
-			removeAllItems(&ll);
+			//removeAllItems(&ll); 이건 왜 있는거임?
 			break;
 		case 0:
 			removeAllItems(&ll);
@@ -90,7 +90,41 @@ int main()
 
 int insertSortedLL(LinkedList *ll, int item)
 {
-	/* add your code here */
+	// 현재 노드를 가리키는 포인터
+	ListNode *cur;
+
+	// 삽입할 위치
+	int index = 0;
+
+	if (ll == NULL) return -1;
+
+	// 머리 노드가 빈 경우 바로 삽입
+	if (ll -> head == NULL){
+		insertNode(ll, 0, item);
+		return 0;
+	}
+
+	// 머리 노드부터 시작
+	cur = ll -> head;
+
+	// 찾는 값보다 작으면 계속 이동
+	while ((cur -> item) < item){
+		cur = cur -> next;
+		index++;
+
+		// 범위를 넘어서면 break
+		if (cur == NULL){
+			break;
+		}
+	}
+
+	// 현재 존재하는 값인 경우, -1을 반환
+	if ((cur != NULL) && ((cur -> item) == item)){
+		return -1;
+	}
+	// 현재 없는 값인 경우, 찾은 위치에 노드를 삽입하고 인덱스를 반환
+	insertNode(ll, index, item);
+	return index;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

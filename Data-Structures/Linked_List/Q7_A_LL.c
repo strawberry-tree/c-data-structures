@@ -87,7 +87,26 @@ int main()
 
 void RecursiveReverse(ListNode **ptrHead)
 {
-	/* add your code here */
+	// 다음 노드가 없으면 종료
+	if ((*ptrHead) -> next == NULL){
+		return;
+	}
+
+	// 현재, 다음 노드를 별도 변수로 보관
+	ListNode* curr = *ptrHead;
+
+	// 머리 노드를, 다음 노드로 변경
+	*ptrHead = (*ptrHead) -> next;
+	
+	// 다음 노드 재귀 호출
+	RecursiveReverse(ptrHead);
+
+	// 다음 노드가 현재 노드를 가리키게 함
+	curr -> next -> next = curr;
+
+	// 자신은 NULL을 가리킴
+	curr -> next = NULL; 
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////
