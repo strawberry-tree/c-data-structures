@@ -101,7 +101,20 @@ int main()
 int countOneChildNodes(BTNode *node)
 
 {
-    /* add your code here */
+    if (node == NULL) return 0;
+    
+    // 왼쪽, 오른쪽 서브트리에서의 결과
+    int result = countOneChildNodes(node -> left) + countOneChildNodes(node -> right);
+
+    // 지금 노드의 자식이 1개일 시 result에 1 추가
+    if (node -> left == NULL && node -> right != NULL){
+        result++;
+    } else if (node -> left != NULL && node -> right == NULL){
+        result++;
+    }
+
+    // result를 반환
+    return result;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

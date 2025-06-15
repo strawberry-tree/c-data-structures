@@ -103,7 +103,17 @@ int main()
 int sumOfOddNodes(BTNode *node)
 
 {
-    /* add your code here */
+    if (node == NULL) return 0;
+    
+    // 두 서브트리 내 홀수의 합을 모두 더한 값
+    int result = sumOfOddNodes(node -> left) + sumOfOddNodes(node -> right);
+
+    if ((node -> item) % 2 == 1){
+        return result + node -> item;
+    } else {
+        return result;
+    }
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////

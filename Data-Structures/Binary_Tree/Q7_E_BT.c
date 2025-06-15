@@ -102,7 +102,9 @@ int main()
 
 int smallestValue(BTNode *node)
 {
-	/* add your code here */
+	if (node == NULL){
+        
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////
