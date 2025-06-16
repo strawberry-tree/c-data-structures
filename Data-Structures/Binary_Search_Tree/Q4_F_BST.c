@@ -91,7 +91,43 @@ int main()
 
 void postOrderIterativeS1(BSTNode *root)
 {
-	 /* add your code here */
+	if (root == NULL) return;
+
+	// 스택 선언
+	Stack s;
+	s.top = NULL;
+
+	// 현재 탐색 중인 노드
+	BSTNode *curr = root;
+
+	// 현재 탐색 중인 노드 이전 노드
+	// 부모 노드가 아님!! 이전 노드임!!
+	BSTNode *prev = NULL;
+
+	while (curr != NULL || isEmpty(&s) == 0){
+		
+		// 현재 탐색 중인 노드를 스택에 푸시하고, 왼쪽 노드로 이동
+		if (curr != NULL){
+			push(&s, curr);
+			
+			prev = curr;
+			curr = curr -> left;
+		} else {
+			curr = peek(&s);
+
+			// 왼쪽에서 온 경우
+			if (prev == curr -> left){
+				prev = curr;
+				curr = curr -> right;
+			} else {
+			// 오른쪽에서 온 경우
+				curr = pop(&s);
+				printf("%d ", curr -> item);
+				prev = curr;
+				curr = NULL;
+			}
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

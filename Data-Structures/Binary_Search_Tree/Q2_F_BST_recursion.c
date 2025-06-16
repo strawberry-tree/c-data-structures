@@ -2,7 +2,7 @@
 
 /* CE1007/CZ1007 Data Structures
 Lab Test: Section F - Binary Search Trees Questions
-Purpose: Implementing the required functions for Question 3 */
+Purpose: Implementing the required functions for Question 2 */
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -30,11 +30,10 @@ typedef struct _stack
 ///////////////////////// function prototypes ////////////////////////////////////
 
 // You should not change the prototypes of these functions
-void preOrderIterative(BSTNode *root);
+void inOrderTraversal(BSTNode *node);
 
 void insertBSTNode(BSTNode **node, int value);
 
-// You may use the following functions or you may write your own
 void push(Stack *stack, BSTNode *node);
 BSTNode *pop(Stack *s);
 BSTNode *peek(Stack *s);
@@ -49,11 +48,11 @@ int main()
 	c = 1;
 
 	//Initialize the Binary Search Tree as an empty Binary Search Tree
-	BSTNode * root;
+	BSTNode *root;
 	root = NULL;
 
 	printf("1: Insert an integer into the binary search tree;\n");
-	printf("2: Print the pre-order traversal of the binary search tree;\n");
+	printf("2: Print the in-order traversal of the binary search tree;\n");
 	printf("0: Quit;\n");
 
 
@@ -70,8 +69,8 @@ int main()
 			insertBSTNode(&root, i);
 			break;
 		case 2:
-			printf("The resulting pre-order traversal of the binary search tree is: ");
-			preOrderIterative(root); // You need to code this function
+			printf("The resulting in-order traversal of the binary search tree is: ");
+			inOrderTraversal(root); // You need to code this function
 			printf("\n");
 			break;
 		case 0:
@@ -89,32 +88,21 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void preOrderIterative(BSTNode *root)
+void inOrderTraversal(BSTNode *root)
 {
+	// NULL일 땐 바로 return (종료조건)
 	if (root == NULL) return;
 
-	// 스택 선언
-	Stack s;
-	s.top = NULL;
 
-	push(&s, root);
-	BSTNode *curr;
+	// 왼쪽 자식 탐색
+	inOrderTraversal(root -> left);
 
-	while (isEmpty(&s) == 0){
-		// 현재 노드 팝하고 출력
-		curr = pop(&s);
-		printf("%d ", curr -> item);
-		
-		// 좌측 노드부터 순회해야 하므로, 우측 노드 먼저 푸시
+	// 자기 자신 출력
+	printf("%d ", root -> item);
 
-		if ((curr -> right) != NULL){
-			push(&s, curr -> right);
-		}
-		
-		if ((curr -> left) != NULL){
-			push(&s, curr -> left);
-		}		
-	}
+
+	// 오른쪽 자식 탐색
+	inOrderTraversal(root -> right);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -168,7 +156,6 @@ void push(Stack *stack, BSTNode * node)
 		stack->top = temp;
 	}
 }
-
 
 BSTNode * pop(Stack * s)
 {

@@ -91,10 +91,36 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void levelOrderTraversal(BSTNode* root)
+void levelOrderTraversal(BSTNode *root)
 {
+	// BFS 비슷하게 구현하면 될려나?
+	Queue q;
+	q.head = NULL;
+	q.tail = NULL;
 
-    /* add your code here */
+	if (root == NULL) return;
+
+	// 일단 루트 노드를 넣어줘요
+	enqueue(&(q.head), &(q.tail), root);
+
+	BSTNode *curr;
+	// 큐가 비어 있지 않을 때
+	while(isEmpty(q.head) == 0){
+		// 노드를 꺼낸 뒤
+		curr = dequeue(&(q.head), &(q.tail));
+		
+		// 노드를 출력한 뒤
+		printf("%d ", curr -> item);
+
+		// 자식을 노드에 넣기
+		if (curr -> left != NULL){
+			enqueue(&(q.head), &(q.tail), curr -> left);
+		}
+		
+		if (curr -> right != NULL){
+			enqueue(&(q.head), &(q.tail), curr -> right);
+		}
+	}  
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -133,7 +159,7 @@ void enqueue(QueueNode **headPtr, QueueNode **tailPtr, BSTNode *node)
 	// dynamically allocate memory
 	QueueNode *newPtr = malloc(sizeof(QueueNode));
 
-	// if newPtr does not equal NULL
+	// if newPtr does not equal NULL (메모리할당 실패 시)
 	if (newPtr != NULL) {
 		newPtr->data = node;
 		newPtr->nextPtr = NULL;

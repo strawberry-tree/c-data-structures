@@ -53,7 +53,7 @@ int insertNode(LinkedList *ll, int index, int value){
     ListNode *pre, *cur;
 
     // 연결 리스트가 없거나, 인덱스가 범위를 벗어나는 경우
-    if (ll == NULL || index < 0 || index > ll->size + 1)
+    if (ll == NULL || index < 0 || index > ll->size)
 		return -1;
 
     // 머리 노드가 없어, 인덱스 0에 삽입하는 경우
@@ -213,6 +213,23 @@ int peek(Stack *s){
     }
 }
 
+// 모든 노드를 삭제
+void removeAllItems(LinkedList *ll)
+{
+	ListNode *cur = ll->head;   // 현재 노드
+	ListNode *tmp;              // 다음 노드를 저장할 임시 변수
+
+    // 모든 노드의 메모리 할당 해제
+	while (cur != NULL){
+		tmp = cur->next;
+		free(cur);
+		cur = tmp;
+	}
+    
+    // 머리 노드는 NULL, 연결리스트 크기는 0으로 
+	ll -> head = NULL;
+	ll -> size = 0;
+}
 
 
 
@@ -246,6 +263,8 @@ int main(void){
     // 스택의 크기 확인
     printf("스택의 크기: %d\n", s.ll.size);
     // [출력] 스택의 크기: 4
+
+    removeAllItems(&(s.ll));
 
     return 0;
 }

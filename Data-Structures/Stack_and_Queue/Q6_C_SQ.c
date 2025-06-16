@@ -111,10 +111,13 @@ int main()
 
 void removeUntil(Stack *s, int value)
 {
+	// 스택이 없는 경우 예외 처리
 	if (s == NULL){
 		return;
 	}
 
+	// 스택의 최상단 값이 value와 동일할 때까지 pop
+	// 단, 스택이 빈 경우 종료
 	while (!isEmptyStack(s) && peek(s) != value){
 		pop(s);
 	}

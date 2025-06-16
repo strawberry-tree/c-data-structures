@@ -146,6 +146,9 @@ int removeNode(LinkedList *ll, int index){
 
         return 0;
     }
+
+    // 삭제에 실패
+    return -1;
 }
 
 void printList(LinkedList *ll){
@@ -167,6 +170,24 @@ void printList(LinkedList *ll){
     printf("\n");
 }
 
+// 모든 노드를 삭제
+void removeAllItems(LinkedList *ll)
+{
+	ListNode *cur = ll->head;   // 현재 노드
+	ListNode *tmp;              // 다음 노드를 저장할 임시 변수
+
+    // 모든 노드의 메모리 할당 해제
+	while (cur != NULL){
+		tmp = cur->next;
+		free(cur);
+		cur = tmp;
+	}
+    
+    // 머리 노드는 NULL, 연결리스트 크기는 0으로 
+	ll -> head = NULL;
+	ll -> size = 0;
+}
+
 int main(void){
     // size는 0, head는 NULL로 초기화
     LinkedList ll = {0, NULL};
@@ -184,6 +205,9 @@ int main(void){
     // 2번 인덱스의 노드를 삭제
     removeNode(&ll, 2);
     printList(&ll); // 41 10 33
+
+    // 메모리 해제(free) 위해 실행
+    removeAllItems(&ll);
 
     return 0;
 }

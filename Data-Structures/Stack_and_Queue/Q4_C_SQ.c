@@ -112,6 +112,8 @@ int main()
 
 void reverse(Queue *q)
 {
+	if (q == NULL || q -> ll.head == NULL | q -> ll.size <= 1) return;
+
 	Stack s;
 	s.ll.head = NULL;
 	s.ll.tail = NULL;

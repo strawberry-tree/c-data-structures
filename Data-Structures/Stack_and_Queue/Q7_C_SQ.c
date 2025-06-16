@@ -125,7 +125,7 @@ int balanced(char *expression)
 				pop(&s);
 			} else if (peek(&s) == '{' && letter == '}'){
 				pop(&s);
-			} else{
+			} else {
 				return 1;	// 불균형
 			}
 		}

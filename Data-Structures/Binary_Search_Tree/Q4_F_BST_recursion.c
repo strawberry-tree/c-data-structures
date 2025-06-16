@@ -2,7 +2,7 @@
 
 /* CE1007/CZ1007 Data Structures
 Lab Test: Section F - Binary Search Trees Questions
-Purpose: Implementing the required functions for Question 3 */
+Purpose: Implementing the required functions for Question 4 */
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -30,7 +30,7 @@ typedef struct _stack
 ///////////////////////// function prototypes ////////////////////////////////////
 
 // You should not change the prototypes of these functions
-void preOrderIterative(BSTNode *root);
+void postOrderIterativeS1(BSTNode *node);
 
 void insertBSTNode(BSTNode **node, int value);
 
@@ -53,7 +53,7 @@ int main()
 	root = NULL;
 
 	printf("1: Insert an integer into the binary search tree;\n");
-	printf("2: Print the pre-order traversal of the binary search tree;\n");
+	printf("2: Print the post-order traversal of the binary search tree;\n");
 	printf("0: Quit;\n");
 
 
@@ -70,8 +70,8 @@ int main()
 			insertBSTNode(&root, i);
 			break;
 		case 2:
-			printf("The resulting pre-order traversal of the binary search tree is: ");
-			preOrderIterative(root); // You need to code this function
+			printf("The resulting post-order traversal of the binary search tree is: ");
+			postOrderIterativeS1(root); // You need to code this function
 			printf("\n");
 			break;
 		case 0:
@@ -89,32 +89,13 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void preOrderIterative(BSTNode *root)
+void postOrderIterativeS1(BSTNode *root)
 {
 	if (root == NULL) return;
 
-	// 스택 선언
-	Stack s;
-	s.top = NULL;
-
-	push(&s, root);
-	BSTNode *curr;
-
-	while (isEmpty(&s) == 0){
-		// 현재 노드 팝하고 출력
-		curr = pop(&s);
-		printf("%d ", curr -> item);
-		
-		// 좌측 노드부터 순회해야 하므로, 우측 노드 먼저 푸시
-
-		if ((curr -> right) != NULL){
-			push(&s, curr -> right);
-		}
-		
-		if ((curr -> left) != NULL){
-			push(&s, curr -> left);
-		}		
-	}
+	postOrderIterativeS1(root -> left);
+	postOrderIterativeS1(root -> right);
+	printf("%d ", root -> item);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -90,7 +90,33 @@ int main()
 
 void inOrderTraversal(BSTNode *root)
 {
-	 /* add your code here */
+	if (root == NULL) return;
+
+	// 스택 선언
+	Stack s;
+	s.top = NULL;
+
+	// 현재 탐색 중인 노드
+	BSTNode *curr = root;
+
+	while (curr != NULL || isEmpty(&s) == 0){
+		
+		// 현재 탐색 중인 노드를 스택에 푸시하고, 왼쪽 노드로 이동
+		if (curr != NULL){
+			push(&s, curr);
+			curr = curr -> left;
+		} else {
+			// curr == NULL인 경우는
+			// (1) 왼쪽 노드에 자식이 없었던 경우 -> 스택에서 부모노드를 pop해 출력하고, 이후 오른쪽 자식으로 이동
+
+			// (2) 직전에 pop하고 오른쪽 자식으로 이동했는데, 그 오른쪽 자식이 없는 경우
+
+			// 이 과정이 종료되면 오른쪽 노드로 이동.
+			curr = pop(&s);
+			printf("%d ", curr -> item);
+			curr = curr -> right;
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

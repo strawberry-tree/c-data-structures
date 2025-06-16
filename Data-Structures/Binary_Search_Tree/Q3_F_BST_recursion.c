@@ -93,28 +93,9 @@ void preOrderIterative(BSTNode *root)
 {
 	if (root == NULL) return;
 
-	// 스택 선언
-	Stack s;
-	s.top = NULL;
-
-	push(&s, root);
-	BSTNode *curr;
-
-	while (isEmpty(&s) == 0){
-		// 현재 노드 팝하고 출력
-		curr = pop(&s);
-		printf("%d ", curr -> item);
-		
-		// 좌측 노드부터 순회해야 하므로, 우측 노드 먼저 푸시
-
-		if ((curr -> right) != NULL){
-			push(&s, curr -> right);
-		}
-		
-		if ((curr -> left) != NULL){
-			push(&s, curr -> left);
-		}		
-	}
+	printf("%d ", root -> item);
+	preOrderIterative(root -> left);
+	preOrderIterative(root -> right);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

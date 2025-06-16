@@ -102,7 +102,20 @@ int main()
 
 int hasGreatGrandchild(BTNode *node)
 {
-	/* add your code here */
+    // 현재 트리의 높이를 반환
+    // 높이가 3 이상이면 great grandchild가 있음
+
+	if (node == NULL) return -1;
+    int left = hasGreatGrandchild(node -> left);
+    int right = hasGreatGrandchild(node -> right);
+
+    // 두 서브트리의 높이 중 더 높은 값에
+    // 1을 더하면 자신의 높이가 됨
+    int height = left > right ? left + 1 : right + 1;
+    if (height >= 3) {
+        printf("%d ", node -> item);
+    }
+    return height;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
