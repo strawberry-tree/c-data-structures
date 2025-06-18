@@ -115,20 +115,24 @@ void postOrderIterativeS1(BSTNode *root)
 		} else {
 			curr = peek(&s);
 
-			// 왼쪽에서 온 경우
-			if (prev == curr -> left){
-				prev = curr;
-				curr = curr -> right;
-			} else {
-			// 오른쪽에서 온 경우
+			
+			if (curr -> right == NULL || curr -> right == prev){
+				// (1) 오른쪽에서 올라온 경우
+				// (2) 왼쪽에서 올라왔는데, 오른쪽이 없는 경우
+				// 순회가 완료됐으니 자기 자신을 팝
 				curr = pop(&s);
 				printf("%d ", curr -> item);
 				prev = curr;
 				curr = NULL;
+			} else {
+				// 왼쪽에서 왔는데 오른쪽이 존재하는 경우
+				// 오른쪽으로 이동
+				curr = curr -> right;
 			}
-		}
 	}
 }
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 

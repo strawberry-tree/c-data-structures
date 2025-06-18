@@ -120,7 +120,6 @@ void postOrderIterativeS2(BSTNode *root)
 			push(&s1, popNode -> left);
 			push(&s1, popNode -> right);
 		}
-		
 	}
 
 	while (isEmpty(&s2) == 0){

@@ -102,8 +102,8 @@ int main()
 
 int hasGreatGrandchild(BTNode *node)
 {
-    // 현재 트리의 높이를 반환
-    // 높이가 3 이상이면 great grandchild가 있음
+    // node를 루트 노드로 가진 트리의 높이를 반환
+    // 높이가 3 이상이면 증손자가 있음
 
 	if (node == NULL) return -1;
     int left = hasGreatGrandchild(node -> left);
@@ -112,6 +112,8 @@ int hasGreatGrandchild(BTNode *node)
     // 두 서브트리의 높이 중 더 높은 값에
     // 1을 더하면 자신의 높이가 됨
     int height = left > right ? left + 1 : right + 1;
+
+    // 높이가 3 이상이면, 증손자가 존재하므로 값을 출력
     if (height >= 3) {
         printf("%d ", node -> item);
     }
